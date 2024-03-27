@@ -1,0 +1,51 @@
+<div mat-dialog-title>
+    <h1 *ngIf="!data">Add Employee </h1>
+    <h1 *ngIf="data">Edit Employee</h1>
+</div>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" required maxlength="500" formControlName="firstName"
+                    [(ngModel)]="employee.firstName">
+                <mat-error>
+                    first name required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+
+                <input matInput placeholder="Last Name" required maxlength="500" formControlName="lastName"
+                    [(ngModel)]="employee.lastName">
+                <mat-error>
+                    Last name required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+
+                <input matInput placeholder="Email Address" required maxlength="500" formControlName="email"
+                    [(ngModel)]="employee.emailAddress">
+                <mat-error>
+                    Email Address required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Salary</mat-label>
+
+                <input matInput placeholder="Salary" required type="number" min="0" formControlName="salary"
+                    [(ngModel)]="employee.salary">
+                <mat-error>
+                    Salary required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-action class="action"  align="end">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel </button>
+        <button mat-raised-button color="primary">{{data? 'Update':'Save'}} </button>
+    </div>
+</form>

@@ -1,0 +1,61 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Luftborn App</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button (click)="openAddEditEmployeeDialog()">
+    Add Employee
+  </button>
+</mat-toolbar>
+<div class="table-responsive">
+  <table mat-table [dataSource]="dataSource" class="full-width-table table table-striped">
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <!-- Last Name Column  -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="emailAddress">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.emailAddress}} </td>
+    </ng-container>
+
+    <!-- Salary Column -->
+    <ng-container matColumnDef="salary">
+      <th mat-header-cell *matHeaderCellDef>Salary</th>
+      <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
+    </ng-container>
+    <!-- Actions  Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let element">
+        <div>
+
+          <button mat-icon-button (click)="openEditEmployeeDialog(element)">
+            <mat-icon color="primary" style="cursor: pointer;">edit</mat-icon>
+          </button> 
+
+          <a (click)="confirmDeleteEmployee(element.id)" href="javascript:void(0)" >
+          <mat-icon aria-hidden="false" aria-label="Delete Employee" color="warn">delete</mat-icon>
+      </a>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="totalItems" (page)="pageChanged($event)" aria-label="Select page">
+  </mat-paginator>
+</div>
+<router-outlet></router-outlet>
